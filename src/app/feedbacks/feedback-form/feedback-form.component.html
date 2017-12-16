@@ -1,0 +1,10 @@
+<form [formGroup]="feedbackForm">
+  <mat-form-field class="example-full-width">
+    <input matInput
+           formControlName="feedback"
+           placeholder="Your feedback...">
+  </mat-form-field>
+  <button mat-button
+          [disabled]="feedbackForm.invalid"
+          (click)="sendFeedback()">Click me!</button>
+</form>
