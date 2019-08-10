@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {
   AngularFirestore,
   AngularFirestoreCollection
-} from 'angularfire2/firestore';
+} from "angularfire2/firestore";
 
 interface Feedback {
   feedback: string;
@@ -11,28 +11,23 @@ interface Feedback {
 }
 
 @Component({
-  selector: 'app-feedback-form',
-  templateUrl: './feedback-form.component.html',
-  styleUrls: ['./feedback-form.component.css']
+  selector: "app-feedback-form",
+  templateUrl: "./feedback-form.component.html",
+  styleUrls: ["./feedback-form.component.css"]
 })
 export class FeedbackFormComponent implements OnInit {
-
   feedbackForm: FormGroup;
   feedbackCollectionRef: AngularFirestoreCollection<Feedback>;
 
-  constructor(
-    db: AngularFirestore,
-    public formBuilder: FormBuilder,
-  ) {
-    this.feedbackCollectionRef = db.collection<Feedback>('feedbacks');
+  constructor(db: AngularFirestore, public formBuilder: FormBuilder) {
+    this.feedbackCollectionRef = db.collection<Feedback>("feedbacks");
 
     this.feedbackForm = this.formBuilder.group({
-      feedback: ['', [Validators.required]],
+      feedback: ["", [Validators.required]]
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   sendFeedback() {
     console.log(this.feedbackForm.value);
@@ -41,7 +36,6 @@ export class FeedbackFormComponent implements OnInit {
       this.feedbackCollectionRef.add({ feedback: feedback, votes: 0 });
     }
 
-    this.feedbackForm.controls.feedback.setValue('');
+    this.feedbackForm.controls.feedback.setValue("");
   }
-
 }
